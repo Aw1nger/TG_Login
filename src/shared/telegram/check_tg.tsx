@@ -8,6 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Spinner } from "../components/ui/spinner";
 import { loadUser, parseUser, saveUser, type User } from "./telegram-user";
 
 const authContext = createContext<User | null>(null);
@@ -19,16 +20,21 @@ export const getTelegramWebApp = () => {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const saved = loadUser();
     if (saved) {
       setUser(saved);
+      setIsLoading(false);
       return;
     }
 
     const telegram = getTelegramWebApp();
-    if (!telegram) return;
+    if (!telegram) {
+      setIsLoading(false);
+      return;
+    }
 
     telegram.ready();
 
@@ -39,7 +45,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(parsed);
       }
     }
+
+    setIsLoading(false);
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex grow flex-col justify-center items-center">
+        <Spinner scale={2} />
+      </div>
+    );
+  }
 
   if (!user) {
     return (
