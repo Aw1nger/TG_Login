@@ -25,7 +25,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
   } else {
     console.log("tg is undefind")
-    router.replace("/404");
   }
 }
 
