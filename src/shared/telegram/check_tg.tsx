@@ -1,17 +1,16 @@
 "use client";
 
+import Script from "next/script";
 import {
   createContext,
+  type ReactNode,
   useContext,
-  useState,
   useEffect,
-  ReactNode,
+  useState,
 } from "react";
-import { Spinner } from "../components/ui/spinner";
-import { Cross } from "lucide-react";
-import Script from "next/script";
+import { loadUser, parseUser, saveUser, type User } from "./telegram-user";
 
-const authContext = createContext<TelegramWebApp | null>(null);
+const authContext = createContext<User | null>(null);
 
 export const getTelegramWebApp = () => {
   if (typeof window === "undefined") return null;
@@ -19,27 +18,30 @@ export const getTelegramWebApp = () => {
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [tg, setTg] = useState<TelegramWebApp | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    const saved = loadUser();
+    if (saved) {
+      setUser(saved);
+      return;
+    }
+
     const telegram = getTelegramWebApp();
-    console.log(telegram);
     if (!telegram) return;
 
     telegram.ready();
 
-    setTg(telegram);
+    if (telegram.initDataUnsafe?.user) {
+      const parsed = parseUser(telegram.initDataUnsafe.user);
+      if (parsed) {
+        saveUser(parsed);
+        setUser(parsed);
+      }
+    }
   }, []);
 
-  if (!tg) {
-    return (
-      <div className="flex grow flex-col justify-center items-center">
-        <Spinner scale={2} />
-      </div>
-    );
-  }
-
-  if (!tg.initData) {
+  if (!user) {
     return (
       <div className="flex grow flex-col justify-center items-center">
         <Script
@@ -54,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
   }
 
-  return <authContext.Provider value={tg}>{children}</authContext.Provider>;
+  return <authContext.Provider value={user}>{children}</authContext.Provider>;
 }
 
 export function useAuth() {
