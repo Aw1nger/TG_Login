@@ -17,12 +17,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const tg = getTelegramWebApp();
 
   if (tg?.ready()) {
+    console.log(tg.initDataUnsafe.user)
     return (
       <authContext.Provider value={tg}>
         {children}
       </authContext.Provider>
     );
-  } else router.replace("/404");
+  } else {
+    console.log("tg is undefind")
+    router.replace("/404");
+  }
 }
 
 export function useAuth() {
