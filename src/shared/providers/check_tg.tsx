@@ -9,6 +9,7 @@ import {
 } from "react";
 import { Spinner } from "../components/ui/spinner";
 import { Cross } from "lucide-react";
+import Script from "next/script";
 
 const authContext = createContext<TelegramWebApp | null>(null);
 
@@ -41,7 +42,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   if (!tg.initData) {
     return (
       <div className="flex grow flex-col justify-center items-center">
-        <Cross />
+        <Script
+          async
+          src="https://telegram.org/js/telegram-widget.js?22"
+          data-telegram-login="Mining_RPG_bot"
+          data-size="large"
+          data-auth-url="aw1nger.ru/login_tg"
+          data-request-access="write"
+        />
       </div>
     );
   }
