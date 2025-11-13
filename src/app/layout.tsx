@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Aw1nger Test TGWebApp",
-  description: "Проект для тестирования Telegram Web Apps и авторизации с помощью Telegram Login",
+  description:
+    "Проект для тестирования Telegram Web Apps и авторизации с помощью Telegram Login",
 };
 
 export default function RootLayout({
@@ -26,11 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  text-(--tg-theme-text-color)
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh text-(--tg-theme-text-color)
                    bg-(--tg-theme-bg-color)`}
       >
         {children}
-<Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        <Script
+          src="https://telegram.org/js/telegram-web-app.js"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );

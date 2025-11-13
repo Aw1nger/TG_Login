@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,21 +10,18 @@ export default function Home() {
         </h1>
 
         <section className="flex flex-col gap-4  max-w-xl">
-          <h2 className="text-2xl font-semibold ">
-            📘 About the Project
-          </h2>
+          <h2 className="text-2xl font-semibold ">📘 About the Project</h2>
           <p>
-            This project was created for testing <b>Telegram login</b> functionality
-            for a Telegram Web App and deploying it on <b>Vercel</b>.
+            This project was created for testing <b>Telegram login</b>{" "}
+            functionality for a Telegram Web App and deploying it on{" "}
+            <b>Vercel</b>.
           </p>
           <p>It is intended for development and testing purposes only.</p>
         </section>
 
-        <section className="flex flex-col gap-4 ">
-          <h2 className="text-2xl font-semibold">
-            🚀 Features
-          </h2>
-          <ul className="list-disc list-inside space-y-2">
+        <section className="flex w-full flex-col gap-4 ">
+          <h2 className="text-2xl font-semibold">🚀 Features</h2>
+          <ul className="list-disc list-inside items-center space-y-2">
             <li>Telegram login integration test</li>
             <li>Simple web interface for testing</li>
             <li>Easy deployment to Vercel</li>
@@ -46,7 +44,6 @@ export default function Home() {
             />
             Deploy on Vercel
           </a>
-
           <a
             href="https://core.telegram.org/bots/webapps#initializing-mini-apps"
             target="_blank"
@@ -55,6 +52,7 @@ export default function Home() {
           >
             Telegram Docs
           </a>
+          <Button variant="tg">Login with Telegram</Button>
         </div>
       </main>
     </div>
