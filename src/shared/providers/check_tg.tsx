@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           src="https://telegram.org/js/telegram-widget.js?22"
           data-telegram-login="Mining_RPG_bot"
           data-size="large"
-          data-auth-url="aw1nger.ru/login_tg"
+          data-auth-url="https://aw1nger.ru/login_tg"
           data-request-access="write"
         />
       </div>
