@@ -6,8 +6,8 @@ export const UserSchema = z.object({
   last_name: z.string().min(1),
   username: z.string().min(1),
   photo_url: z.url(),
-  auth_date: z.coerce.number(),
-  hash: z.string().length(64),
+  auth_date: z.coerce.number().optional(),
+  hash: z.string().length(64).optional(),
 });
 
 export type User = z.infer<typeof UserSchema>;
