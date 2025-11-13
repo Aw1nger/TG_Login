@@ -1,5 +1,9 @@
+import { UserInfo } from "@/feature/user-info";
+
 const Page = () => {
-  return <section>Tg user info placeholder</section>;
+  return (<section>
+    <UserInfo/>
+  </section>);
 };
 
 export default Page;

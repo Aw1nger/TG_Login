@@ -1,24 +1,28 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
-import { Spinner } from "../components/ui/spinner";
+import { createContext, useContext } from "react";
 
-interface authContextType {
-  username: string;
-  balance: number;
-}
+const authContext = createContext<TelegramWebApp | null>(null);
 
-const authContext = createContext<authContextType | null>(null);
+
+export const getTelegramWebApp = () => {
+  if (typeof window === "undefined") return null;
+  return window.Telegram?.WebApp ?? null;
+};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
-  return (
-    <section className="flex justify-center items-center flex-col grow">
-      <Spinner />
-    </section>
-  );
+  const tg = getTelegramWebApp();
+
+  if (tg?.ready()) {
+    return (
+      <authContext.Provider value={tg}>
+        {children}
+      </authContext.Provider>
+    );
+  } else router.replace("/404");
 }
 
 export function useAuth() {

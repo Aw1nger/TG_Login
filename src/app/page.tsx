@@ -1,5 +1,6 @@
-import { Button } from "@/shared/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/shared/components/ui/button";
 
 export default function Home() {
   return (
@@ -52,7 +53,9 @@ export default function Home() {
           >
             Telegram Docs
           </a>
-          <Button variant="tg">Login with Telegram</Button>
+          <Button variant="tg" asChild>
+            <Link href={"/profile"}>Login with Telegram</Link>
+          </Button>
         </div>
       </main>
     </div>
