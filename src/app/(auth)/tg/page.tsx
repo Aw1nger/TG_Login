@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { setUserCookie } from "@/shared/auth/action";
+import { AuthUser } from "@/feature/auth_user";
 import { parseUser, type User } from "@/shared/auth/user";
 
 export const dynamic = "force-dynamic";
@@ -16,10 +15,7 @@ const Page = async ({ searchParams }: { searchParams: Promise<User> }) => {
       </div>
     );
   }
-
-  await setUserCookie(user);
-
-  redirect("/profile");
+  return <AuthUser user={user} />;
 };
 
 export default Page;

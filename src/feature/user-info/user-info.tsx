@@ -11,9 +11,9 @@ export const UserInfo = () => {
   const user = useAuth();
 
   return (
-    <section className="flex container mx-auto flex-col gap-2">
-      <div className="flex gap-2">
-        <Avatar className="rounded-lg size-10 sm:size-20">
+    <section className="flex container p-4 mx-auto flex-col gap-2">
+      <div className="flex gap-2 items-center">
+        <Avatar className="rounded-lg size-20">
           <AvatarImage src={user?.photo_url} alt={user?.username} />
           <AvatarFallback>
             {user?.username?.slice(0, 2).toUpperCase()}
