@@ -1,5 +1,6 @@
-import { AuthUser } from "@/feature/auth_user";
-import { parseUser, type User } from "@/shared/telegram/telegram-user";
+import { redirect } from "next/navigation";
+import { setUserCookie } from "@/shared/auth/action";
+import { parseUser, type User } from "@/shared/auth/user";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,9 @@ const Page = async ({ searchParams }: { searchParams: Promise<User> }) => {
     );
   }
 
-  return <AuthUser user={user} />;
+  await setUserCookie(user);
+
+  redirect("/profile");
 };
 
 export default Page;

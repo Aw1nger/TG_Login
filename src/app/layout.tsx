@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { isTelegram } from "@/shared/auth/telegram";
+import { cn } from "@/shared/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Aw1nger Test TGWebApp",
   description:
@@ -27,8 +23,13 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh text-(--tg-theme-text-color)
-                   bg-(--tg-theme-bg-color)`}
+        className={cn(
+          geistSans.variable,
+          "antialiased flex flex-col min-h-dvh",
+          !isTelegram() &&
+            "[--tg-theme-text-color:#000] [--tg-theme-bg-color:#fff] [--tg-theme-button-text-color:#fff] [--tg-theme-button-color:#54a9eb]",
+          "text-(--tg-theme-text-color) bg-(--tg-theme-bg-color)",
+        )}
       >
         {children}
         <Script

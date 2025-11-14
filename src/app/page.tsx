@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center  font-sans ">
+    <div className="flex items-center justify-center">
       <main className="flex w-full max-w-3xl flex-col items-start justify-center gap-10 py-20 px-8 text-center sm:text-left">
         <h1 className="text-4xl font-bold text-center w-full tracking-tight ">
           Telegram Web App Login Test
@@ -34,10 +34,10 @@ export default function Home() {
             href="https://vercel.com/new"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-80"
+            className="flex items-center border justify-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-80"
           >
             <Image
-              className="dark:invert"
+              className="invert"
               src="/vercel.svg"
               alt="Vercel"
               width={18}
@@ -53,7 +53,7 @@ export default function Home() {
           >
             Telegram Docs
           </a>
-          <Button variant="tg" asChild>
+          <Button variant="tg" className="px-6 py-3" asChild>
             <Link href={"/profile"}>Login with Telegram</Link>
           </Button>
         </div>

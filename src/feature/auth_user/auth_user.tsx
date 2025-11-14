@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { saveUser, type User } from "@/shared/telegram/telegram-user";
+import { setUserCookie } from "@/shared/auth/action";
+import type { User } from "@/shared/auth/user";
 
 export const AuthUser = ({ user }: { user: User }) => {
-  saveUser(user);
+  setUserCookie(user);
   const { replace } = useRouter();
   replace("/profile");
 
